@@ -15,7 +15,11 @@
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react-jsx",
-		"typeRoots": ["./node_modules/@types", "./@types"]
+		"typeRoots": ["./node_modules/@types", "./src/@types"]
 	},
-	"include": ["src"]
+	"include": ["src"],
+	"ts-node": {
+		"files": true,
+		"compilerOptions": { "isolatedModules": false, "module": "CommonJS" }
+	}
 }
