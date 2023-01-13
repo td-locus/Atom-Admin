@@ -12,6 +12,14 @@ import { useAppSelector } from '../hooks/useAppSelector';
 import Auth from '../pages/Auth';
 import Dashboard from '../pages/Dashboard/Dashboard';
 
+const Main = lazy(() => import('../pages/Dashboard/Main'));
+const Users = lazy(() => import('../pages/Dashboard/Users'));
+const Groups = lazy(() => import('../pages/Dashboard/Groups'));
+const Tasks = lazy(() => import('../pages/Dashboard/Tasks'));
+const Events = lazy(() => import('../pages/Dashboard/Events'));
+const Domains = lazy(() => import('../pages/Dashboard/Domains'));
+const Profile = lazy(() => import('../pages/Dashboard/Profile'));
+
 const ForgotPassword = lazy(() => import('../pages/ForgotPassword'));
 const NotFound = lazy(() => import('../pages/NotFound'));
 
@@ -31,12 +39,20 @@ const AppRoutes = () => {
                 <Route path="/" element={typeof user === 'object' && user !== undefined ? <Navigate to="/dashboard" /> : <Auth />} />
                 <Route path="forgot-password" element={typeof user === 'object' && user !== undefined ? <Navigate to="/dashboard" /> : <ForgotPassword />} />
                 <Route
-                    path="dashboard"
+                    path="/dashboard"
                     element={
                         <ProtectedPage>
                             <Dashboard />
                         </ProtectedPage>
-                    }></Route>
+                    }>
+                    <Route index element={<Main />} />
+                    <Route path="users" element={<Users />} />
+                    <Route path="groups" element={<Groups />} />
+                    <Route path="tasks" element={<Tasks />} />
+                    <Route path="events" element={<Events />} />
+                    <Route path="domains" element={<Domains />} />
+                    <Route path="me" element={<Profile />} />
+                </Route>
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </Suspense>

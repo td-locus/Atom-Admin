@@ -14,8 +14,8 @@ interface UserState {
 }
 
 const initialState: UserState = {
-    admin: localStorage.getItem(USER_STORAGE_KEY) ? JSON.parse(localStorage.getItem(USER_STORAGE_KEY)!) : undefined,
-    token: localStorage.getItem(TOKEN_STORAGE_KEY) ? JSON.parse(localStorage.getItem(TOKEN_STORAGE_KEY)!) : undefined,
+    admin: sessionStorage.getItem(USER_STORAGE_KEY) ? JSON.parse(sessionStorage.getItem(USER_STORAGE_KEY)!) : undefined,
+    token: sessionStorage.getItem(TOKEN_STORAGE_KEY) ? sessionStorage.getItem(TOKEN_STORAGE_KEY)! : undefined,
 };
 
 const userSlice = createSlice({
@@ -28,9 +28,14 @@ const userSlice = createSlice({
             sessionStorage.setItem(USER_STORAGE_KEY, JSON.stringify(action.payload.admin));
             sessionStorage.setItem(TOKEN_STORAGE_KEY, action.payload.token!);
         },
+        logoutAdmin: state => {
+            state.admin = initialState.admin;
+            state.token = initialState.token;
+            sessionStorage.clear();
+        },
     },
 });
 
-export const { loginAdmin } = userSlice.actions;
+export const { loginAdmin, logoutAdmin } = userSlice.actions;
 
 export default userSlice.reducer;
