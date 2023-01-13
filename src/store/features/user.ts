@@ -4,8 +4,9 @@
 
 // Dependencies
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import configuration from '../../config';
 
-const STORAGE_KEY = 'td-atom-admin-v1';
+const { USER_STORAGE_KEY, TOKEN_STORAGE_KEY } = configuration.CLIENT_STORAGE_KEYS;
 
 interface UserState {
     admin: Admin | undefined;
@@ -13,7 +14,8 @@ interface UserState {
 }
 
 const initialState: UserState = {
-    admin: localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)!) : undefined,
+    admin: localStorage.getItem(USER_STORAGE_KEY) ? JSON.parse(localStorage.getItem(USER_STORAGE_KEY)!) : undefined,
+    token: localStorage.getItem(TOKEN_STORAGE_KEY) ? JSON.parse(localStorage.getItem(TOKEN_STORAGE_KEY)!) : undefined,
 };
 
 const userSlice = createSlice({
@@ -21,8 +23,10 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         loginAdmin: (state, action: PayloadAction<UserState>) => {
-            state = action.payload;
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            state.admin = action.payload.admin;
+            state.token = action.payload.token;
+            sessionStorage.setItem(USER_STORAGE_KEY, JSON.stringify(action.payload.admin));
+            sessionStorage.setItem(TOKEN_STORAGE_KEY, action.payload.token!);
         },
     },
 });

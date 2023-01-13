@@ -21,7 +21,6 @@ interface ProtectedRouteProps {
 
 const AppRoutes = () => {
     const [user] = useAppSelector(state => [state.user.admin]);
-
     const ProtectedPage = ({ children }: ProtectedRouteProps) => {
         return user === undefined ? <Navigate to={'/'} /> : children;
     };
@@ -29,8 +28,8 @@ const AppRoutes = () => {
     return (
         <Suspense fallback={<DefaultSkeleton />}>
             <Routes>
-                <Route path="/" element={typeof user === 'object' && user !== null ? <Navigate to="/dashboard" /> : <Auth />} />
-                <Route path="forgot-password" element={typeof user === 'object' && user !== null ? <Navigate to="/dashboard" /> : <ForgotPassword />} />
+                <Route path="/" element={typeof user === 'object' && user !== undefined ? <Navigate to="/dashboard" /> : <Auth />} />
+                <Route path="forgot-password" element={typeof user === 'object' && user !== undefined ? <Navigate to="/dashboard" /> : <ForgotPassword />} />
                 <Route
                     path="dashboard"
                     element={
