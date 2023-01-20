@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
@@ -136,8 +135,7 @@ export default function Auth() {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage:
-                            'url(https://images.unsplash.com/photo-1582139329536-e7284fece509?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80)',
+                        backgroundImage: 'url(https://images.unsplash.com/photo-1582139329536-e7284fece509?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80)',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: t => (t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900]),
                         backgroundSize: 'cover',
@@ -168,7 +166,7 @@ export default function Auth() {
                                         <button
                                             onClick={renderProps.onClick}
                                             disabled={renderProps.disabled}
-                                            className="flex w-full cursor-pointer items-center justify-center rounded-[30px] border border-gray-300 py-4 font-semibold transition-all hover:border-gray-400 hover:bg-gray-50">
+                                            className="flex w-full cursor-pointer items-center justify-center rounded-4xl border border-gray-300 py-4 font-semibold transition-all hover:border-gray-400 hover:bg-gray-50">
                                             <img src={GoogleIcon} alt="Google Icon" className="mr-1 h-5 w-5" /> Sign in with Google
                                         </button>
                                     </div>
@@ -179,16 +177,7 @@ export default function Auth() {
                                 }}
                             />
                             <Divider sx={{ my: 4 }}>OR</Divider>
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                label="Email Address"
-                                autoComplete="email"
-                                autoFocus
-                                onChange={handleInput('email')}
-                                value={input.email}
-                            />
+                            <TextField margin="normal" required fullWidth label="Email Address" autoComplete="email" autoFocus onChange={handleInput('email')} value={input.email} />
                             <TextField
                                 margin="normal"
                                 required
@@ -199,25 +188,18 @@ export default function Auth() {
                                 value={input.password}
                                 autoComplete="current-password"
                                 InputProps={{
-                                    endAdornment: (
-                                        <IconButton onClick={() => setViewPassword(!viewPassword)}>
-                                            {viewPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                                        </IconButton>
-                                    ),
+                                    endAdornment: <IconButton onClick={() => setViewPassword(!viewPassword)}>{viewPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}</IconButton>,
                                 }}
                             />
-                            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                            <button type="submit" className="w-full transition-all text-center cursor-pointer bg-primary py-4 rounded-4xl my-4 hover:bg-primary-dark text-white uppercase">
                                 Sign In
-                            </Button>
+                            </button>
                             <Grid container className="text-left">
                                 <Grid item xs>
                                     {/* <Link to="/forgot-password" className="text-blue-500 underline hover:text-blue-600">
                                         Forgot password?
                                     </Link> */}
-                                    <MuiLink
-                                        href="https://atom.think-digital.in/auth/reset"
-                                        target="_blank"
-                                        className="text-blue-500 underline hover:text-blue-600">
+                                    <MuiLink href="https://atom.think-digital.in/auth/reset" target="_blank" className="text-blue-500 underline hover:text-blue-600">
                                         Forgot Password?
                                     </MuiLink>
                                 </Grid>
